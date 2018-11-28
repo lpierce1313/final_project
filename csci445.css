@@ -1,0 +1,34 @@
+#taskIcon{
+  color: teal;
+}
+
+#iconFooter{
+  margin-right: 5px;
+}
+
+#taskName{
+  color: teal;
+  font-size: 24px;
+  margin-right: 7px;
+}
+
+.form_holder{
+  margin-left: 10em;
+  margin-right: 10em;
+}
+.form_holder_login{
+  margin-left: 20em;
+  margin-right: 20em;
+}
+
+.login_button{
+  width: 25%;
+  float: right;
+}
+.signup_button{
+  width: 25%;
+}
+
+.fullWidth select{
+  width: 100% !important;
+}
