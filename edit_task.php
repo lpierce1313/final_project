@@ -1,5 +1,43 @@
 <?php
   include("mysql_connection.php");
+
+  if(!loggedIn()) {
+    header("Location: login.php");
+    die();
+  }
+
+  $currUser = (int)($_SESSION['currentUser']);
+
+  if(isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $due_date = $_POST['due_date'];
+    $urgency = (int)$_POST['urgency'];
+    $tid = (int)$_POST['tid'];
+
+    $updateQuery = $conn->prepare("UPDATE tasks SET name=?, description=?, due_date=?, urgency=? WHERE id=? AND user_id=?");
+    $updateQuery->bind_param("sssiii", $name, $description, $due_date, $urgency, $tid, $currUser);
+    
+    if($updateQuery->execute()) {
+      header("Location: tasks.php");
+      die();
+    } else {
+      $error = "Failed to update task.";
+    }
+  }
+
+  else if(isset($_GET['tid'])) {
+    $tid = (int)($_GET['tid']);
+
+    $query = $conn->prepare("SELECT * FROM tasks WHERE id=? AND user_id=?");
+    $query->bind_param("ii", $tid, $currUser); 
+    if($query->execute()) {
+      $data = $query->get_result()->fetch_assoc();
+      $name = $data['name'];
+      $description = $data['description'];
+      $due_date = $data['due_date'];
+    }
+  }
 ?>
 
 <!doctype html>
@@ -18,11 +56,13 @@
       <section class="center form">
         <div class="has-text-centered">
           <h1 class="is-size-3">Create New Task</h1>
-          <h3 class="is-size-4">lpierce1313@gmail.com</h3>
+          <h3 class="is-size-4"><?php echo isset($error) ? $error : ''; ?></h3>
           <br> <br> <br>
         </div>
         <div class="form_holder">
-          <form class="" action="create_task_submit.php" method="post">
+          <form class="" action="edit_task.php" method="post">
+            <input type="hidden" name="tid" value="<?php echo isset($tid) ? $tid : ''; ?>" />
+
             <div class="columns">
               <div class="column">
                 <div class="field">
