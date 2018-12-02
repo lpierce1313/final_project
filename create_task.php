@@ -1,3 +1,26 @@
+<?php
+  include("mysql_connection.php");
+
+  if(isset($_GET['tid'])) {
+    if(!loggedIn()) {
+      header("Location: login.php");
+      die();
+    }
+
+    $tid = (int)($_GET['tid']);
+    $currUser = (int)($_SESSION['currentUser']);
+
+    $query = $conn->prepare("SELECT * FROM tasks WHERE id=? AND user_id=?");
+    $query->bind_param("ii", $tid, $currUser); 
+    if($query->execute()) {
+      $data = $query->get_result()->fetch_assoc();
+      $name = $data['name'];
+      $description = $data['description'];
+      $due_date = $data['due_date'];
+    }
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,13 +47,13 @@
                 <div class="field">
                   <label class="label">Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input class="input" type="text" placeholder="Text input" name="name" value="<?php echo isset($name) ? $name : ''; ?>">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Due date</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="date" placeholder="Email">
+                    <input class="input" type="date" name="due_date" value="<?php echo isset($due_date) ? $due_date : ''; ?>">
                     <span class="icon is-small is-left">
                       <i class="fa fa-calendar"></i>
                     </span>
@@ -41,14 +64,14 @@
                 <div class="field">
                   <label class="label">Description</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input class="input" type="text" placeholder="Text input" name="description" value="<?php echo isset($description) ? $description : ''; ?>">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Urgency</label>
                   <div class="control">
                     <div class="select">
-                      <select class="fullWidth">
+                      <select class="fullWidth" name="urgency">
                         <option>Unimportant</option>
                         <option>Important</option>
                         <option>Critical</option>
@@ -58,7 +81,7 @@
                 </div>
               </div>
             </div>
-            <input class="button is-primary signup_button" type="submit" title="submit">
+            <input class="button is-primary signup_button" type="submit" title="submit" name="submit">
           </form>
           <br> <br> <br>
         </div>
