@@ -37,6 +37,9 @@
       <div class="navbar-item">
         <div class="buttons">
           <?php if(loggedIn()) { ?>
+            <a class="button is-primary" href="./create_task.php">
+              <strong>New Task</strong>
+            </a>
             <a class="button is-light" href="./logout.php">
               Log out
             </a>
