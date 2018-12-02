@@ -25,12 +25,11 @@
       <?php } ?>
         Home
       </a>
-      <a class="navbar-item" href="./tasks.php">
-        Tasks
-      </a>
-      <a class="navbar-item" href="./account.php">
-        My Account
-      </a>
+      <?php if(loggedIn()) { ?>
+        <a class="navbar-item" href="./tasks.php">
+          Tasks
+        </a>
+      <?php } ?>
       </div>
     </div>
     <div class="navbar-end">

@@ -1,12 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="csci445.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <title>Task Manager</title> <!-- Title of the Website -->
+    <?php
+      include 'head.php';
+    ?>
   </head>
   <body>
     <?php
@@ -21,19 +18,19 @@
           <br> <br> <br>
         </div>
         <div class="form_holder">
-          <form class="" action="sign_up_submit.php" method="post">
+          <form name="signup" class="" action="sign_up_submit.php" method="post" onsubmit="return validateForm()">
             <div class="columns">
               <div class="column">
                 <div class="field">
                   <label class="label">First Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="fname">
+                    <input class="input" type="text" placeholder="Text input" name="fname" required>
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email" name="email">
+                    <input class="input" type="email" placeholder="Email" name="email" required>
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
                     </span>
@@ -44,15 +41,16 @@
                 <div class="field">
                   <label class="label">Last Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="lname">
+                    <input class="input" type="text" placeholder="Text input" name="lname" required>
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control">
-                    <input class="input" type="password" name="password">
+                    <input class="input" type="password" name="password" required>
                   </div>
                 </div>
+                <p id="password_error"></p>
               </div>
             </div>
             <input class="button is-primary signup_button" type="submit" title="submit" name="submit">
@@ -64,5 +62,15 @@
       <?php
         include 'footer.php';
       ?>
+      <script type="text/javascript">
+        function validateForm() {
+          var pass = document.forms["signup"]["password"].value;
+          if(pass.length < 6){
+            $("#password_error").text("Password must be 6 characters or longer");
+            $("#password_error").css("color", "red");
+            return false;
+          }
+        }
+      </script>
   </body>
 </html>
