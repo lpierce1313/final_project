@@ -14,11 +14,20 @@
       include 'header.php';
     ?>
     <hr>
-      <section class="">
+      <section class="card_margin">
+        <h1 class="has-text-centered is-size-4">Jack Temple</h1>
+        <br><br>
+        <?php
+        $sql = "SELECT * FROM tasks";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+        ?>
+
         <div class="card card_styling">
           <header class="card-header">
             <p class="card-header-title">
-              Component
+              <?php echo $row['name']?>
             </p>
             <a href="#" class="card-header-icon" aria-label="more options">
               <span class="icon">
@@ -28,18 +37,33 @@
           </header>
           <div class="card-content">
             <div class="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-              <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+              <?php echo $row['description']?>
               <br>
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <p>Due date: <?php echo $row['due_date']?></p>
+              <br>
+              <?php if($row['urgency'] == 0){ ?>
+                <p class="has-text-info">Task is Unimportant</p>
+              <?php  } else if($row['urgency'] == 1) { ?>
+                <p class="has-text-warning">Task is Important</p>
+              <?php } else { ?>
+                <p class="has-text-danger">Task is Urgent</p>
+              <?php } ?>
+
             </div>
           </div>
           <footer class="card-footer">
-            <a href="#" class="card-footer-item">Save</a>
+            <a href="#" class="card-footer-item">Complete</a>
             <a href="#" class="card-footer-item">Edit</a>
             <a href="#" class="card-footer-item">Delete</a>
           </footer>
         </div>
+
+
+        <?php    }
+        } else {
+            echo "0 results";
+        }
+        ?>
       </section>
       <br>
       <?php

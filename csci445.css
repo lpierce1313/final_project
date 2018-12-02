@@ -34,5 +34,15 @@
 }
 
 .card_styling{
-  display: inline-block;
+  display: inline-grid;
+  width: 20%;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.card_margin{
+  text-align: left;
+  margin-left: 2em;
+  margin-right: 2em;
 }
