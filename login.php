@@ -21,6 +21,14 @@
           <br> <br> <br>
         </div>
         <div class="form_holder_login">
+          <p>
+            <?php
+              if(isset($error)) {
+                echo $error;
+              }
+            ?>
+              
+          </p>
           <form action="login_submit.php" method="post">
             <div class="field">
               <label class="label">Email</label>
@@ -34,7 +42,7 @@
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password" name="pass">
+                <input class="input" type="password" name="password">
               </div>
             </div>
             <a class="button is-link is-inverted">Forgot Password</a>

@@ -36,12 +36,18 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href="./signup.php">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="./login.php">
-            Log in
-          </a>
+          <?php if(loggedIn()) { ?>
+            <a class="button is-light" href="./logout.php">
+              Log out
+            </a>
+          <?php } else { ?>
+            <a class="button is-primary" href="./signup.php">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" href="./login.php">
+              Log in
+            </a>
+          <?php } ?>
         </div>
       </div>
     </div>

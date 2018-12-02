@@ -27,7 +27,7 @@
                 <div class="field">
                   <label class="label">First Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="first">
+                    <input class="input" type="text" placeholder="Text input" name="fname">
                   </div>
                 </div>
                 <div class="field">
@@ -44,18 +44,18 @@
                 <div class="field">
                   <label class="label">Last Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="last">
+                    <input class="input" type="text" placeholder="Text input" name="lname">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control">
-                    <input class="input" type="password" name="pass">
+                    <input class="input" type="password" name="password">
                   </div>
                 </div>
               </div>
             </div>
-            <input class="button is-primary signup_button" type="submit" title="submit">
+            <input class="button is-primary signup_button" type="submit" title="submit" name="submit">
           </form>
           <br> <br> <br>
         </div>
