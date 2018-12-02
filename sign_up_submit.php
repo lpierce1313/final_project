@@ -17,6 +17,11 @@
       <section class="center form">
         <h1>Signup Submit</h1>
       </section>
+      <?php
+        $users = $conn->prepare("INSERT INTO users (email, first_name, last_name, password) VALUES(?, ?, ?, ?)");
+        $users->bind_param("ssss", $_POST['email'], $_POST['first'], $_POST['last'], $_POST['pass']);
+        $users->execute();
+      ?>
       <br>
       <?php
         include 'footer.php';

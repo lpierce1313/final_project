@@ -27,13 +27,13 @@
                 <div class="field">
                   <label class="label">First Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input class="input" type="text" placeholder="Text input" name="first">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email">
+                    <input class="input" type="email" placeholder="Email" name="email">
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
                     </span>
@@ -44,13 +44,13 @@
                 <div class="field">
                   <label class="label">Last Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input class="input" type="text" placeholder="Text input" name="last">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control">
-                    <input class="input" type="password">
+                    <input class="input" type="password" name="pass">
                   </div>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+<?php include_once 'mysql_connection.php'; ?>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <?php if($home == 0){ ?>

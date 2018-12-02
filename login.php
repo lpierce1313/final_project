@@ -25,7 +25,7 @@
             <div class="field">
               <label class="label">Email</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="email" placeholder="Email">
+                <input class="input" type="email" placeholder="Email" name="email">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
@@ -34,7 +34,7 @@
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password">
+                <input class="input" type="password" name="pass">
               </div>
             </div>
             <a class="button is-link is-inverted">Forgot Password</a>
