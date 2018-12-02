@@ -1,3 +1,14 @@
+<?php
+  include("mysql_connection.php");
+  if (!loggedIn()){
+    header("Location: login.php");
+    die();
+  }
+  $currUser = (int)($_SESSION['currentUser']);
+  $sql = "SELECT * FROM tasks where user_id = $currUser";
+  $result = $conn->query($sql);
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,8 +26,6 @@
         <h1 class="has-text-centered is-size-4">Jack Temple</h1>
         <br><br>
         <?php
-        $sql = "SELECT * FROM tasks";
-        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
         ?>
