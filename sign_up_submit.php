@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+
   include("mysql_connection.php");
 
   if(isset($_POST['submit'])) {
@@ -11,10 +14,13 @@
 
     $insertQuery = $conn->prepare("INSERT INTO users (email, first_name, last_name, password) VALUES(?, ?, ?, ?)");
     $insertQuery->bind_param("ssss", $email, $fname, $lname, $password);
-    
+
     if($insertQuery->execute()) {
+      echo "<html>Error Creating your user</html>";
       header('Location: index.php');
       die();
+    }else{
+      echo "<html>Error Creating your user</html>";
     }
   }
   // Show sign up page w/ errors
