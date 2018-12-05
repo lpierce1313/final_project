@@ -23,7 +23,7 @@ ini_set('display_errors', true);
       if(file_exists('cred.php')){
         include 'cred.php';
       }
-      $message .= $base + "activate.php?token=" . $activation_token;
+      $message .= $base . "activate.php?token=" . $activation_token;
       mail($email, "CSCI445 Sign up email", $message);
       header('Location: index.php');
     } else{

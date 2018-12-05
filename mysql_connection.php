@@ -1,6 +1,6 @@
 <?php
     $user = "root";
-    $password = "";
+    $pass = "";
     $db = "csci445_final";
     if(file_exists('cred.php')){
       include 'cred.php';
