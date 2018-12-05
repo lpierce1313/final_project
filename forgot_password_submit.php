@@ -1,7 +1,7 @@
 <?php
   include("mysql_connection.php");
   print_r($_POST);
-  
+
   $email = $_POST['email'];
   $query = $conn->prepare("SELECT * FROM users WHERE email=?");
   $query->bind_param("s", $email);
@@ -17,21 +17,25 @@
   }
 
   if($found == 1){
-      
+
     $token = hash('sha256', time());
-    $url = $_SERVER['SERVER_NAME'] . "/change_pass.php" . "/?token=" . $token;
+    $base = "http://localhost/csci445/final_project/";
+    if(file_exists('cred.php')){
+      include 'cred.php';
+    }
+    $url = $base . "/change_pass.php" . "/?token=" . $token;
     echo $url;
     $to = $user['email'];
     $subject = "Forgot Password";
     $message = "Please click the following link to recover your password" . "\r\n" . $url;
 
     mail ($to, $subject, $message);
-      
+
     $query = $conn->prepare("INSERT INTO user_forgotten_password (token, user_id, email) VALUES(?, ?, ?)");
     $query->bind_param("sis", $token, $user['id'], $user['email']);
     $query->execute();
   }
-  
+
 ?>
 
 <!doctype html>
@@ -85,4 +89,3 @@
       ?>
   </body>
 </html>
-

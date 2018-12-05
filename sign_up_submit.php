@@ -27,7 +27,7 @@ ini_set('display_errors', true);
       mail($email, "CSCI445 Sign up email", $message);
       echo "<script>alert('Sign in succes! You are being redirected to the home page.');</script>";
       // die();
-      // header('Location: index.php?b=');
+      // header('Location: index.php?mes=');
       header('Location: index.php');
 
     } else{
