@@ -19,7 +19,7 @@ ini_set('display_errors', true);
 
     if($insertQuery->execute()) {
       $message = "Hello " . $fname . ". Please click the following link to activate your account:";
-      // $message .= "http://localhost/csci445/final_project/activate.php?token=" . $activation_token;
+      $base = "http://localhost/csci445/final_project/";
       if(file_exists('cred.php')){
         include 'cred.php';
       }
