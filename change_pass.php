@@ -23,7 +23,7 @@
         $error = "Can't find token";
         $found = 0;
       }
-      
+
       $query = $conn->prepare("SELECT * FROM users WHERE id=?");
       $query->bind_param("i", $user_id);
       $query->execute();
@@ -72,7 +72,7 @@
           </form>
           <br> <br> <br>
         </div>
-        <?php } else { 
+        <?php } else {
           header('Location: ../index.php');
           die();
         }
@@ -94,7 +94,7 @@
       }
       if(pass != passRetry){
         $("#password_error2").text("Passwords must match");
-        $("#password_error2").css("color", "red");  
+        $("#password_error2").css("color", "red");
         return false;
       }
     }
