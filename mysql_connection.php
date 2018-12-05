@@ -2,8 +2,9 @@
     $user = "root";
     $password = "";
     $db = "csci445_final";
-    if(file_exists('matt.php'))
-    include 'matt.php';
+    if(file_exists('cred.php')){
+      include 'cred.php';
+    }
     $conn = new mysqli("localhost", $user, $password, $db) or die("You are not connected");
 
     session_start();
