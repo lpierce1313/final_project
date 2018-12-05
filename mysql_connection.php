@@ -5,7 +5,7 @@
     if(file_exists('cred.php')){
       include 'cred.php';
     }
-    $conn = new mysqli("localhost", $user, $password, $db) or die("You are not connected");
+    $conn = new mysqli("localhost", $user, $pass, $db) or die("You are not connected");
 
     session_start();
 
