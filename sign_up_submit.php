@@ -25,7 +25,11 @@ ini_set('display_errors', true);
       }
       $message .= $base . "activate.php?token=" . $activation_token;
       mail($email, "CSCI445 Sign up email", $message);
+      echo "<script>alert('Sign in succes! You are being redirected to the home page.');</script>";
+      // die();
+      // header('Location: index.php?b=');
       header('Location: index.php');
+
     } else{
       echo "<html>Error Creating your user</html>";
     }
