@@ -24,7 +24,6 @@
                 echo $error;
               }
             ?>
-
           </p>
           <form action="login_submit.php" method="post">
             <div class="field">

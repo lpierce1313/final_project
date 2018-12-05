@@ -29,7 +29,7 @@
         <hr>
         <h1 class="is-size-3">Create an Account <i class="fa fa-user-circle tealColor" aria-hidden="true"></i></h1>
         <br>
-        <p class="is-size-6">To create an account, click <a href="./signup">here</a></p>
+        <p class="is-size-6">To create an account, click <a href="./signup.php">here</a></p>
         <br><br><br>
         <hr>
       <?php } else { ?>
