@@ -5,8 +5,8 @@
     header("Location: login.php");
     die();
   }
-
   $currUser = (int)($_SESSION['currentUser']);
+
 
   if(isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -24,20 +24,60 @@
     } else {
       $error = "Failed to update task.";
     }
-  }
+  } else {
 
-  else if(isset($_GET['tid'])) {
-    $tid = (int)($_GET['tid']);
+    // Redirect if tid not set
+    if(!isset($_GET['tid'])) {
+      header("Location: tasks.php");
+      die();
+    }
+    $tid = $_GET['tid'];
 
-    $query = $conn->prepare("SELECT * FROM tasks WHERE id=? AND user_id=?");
-    $query->bind_param("ii", $tid, $currUser); 
-    if($query->execute()) {
-      $data = $query->get_result()->fetch_assoc();
-      $name = $data['name'];
-      $description = $data['description'];
-      $due_date = $data['due_date'];
+    // Ensure current task belongs to current user, redirect otherwise
+    $isCurrentUserTask = $conn->prepare("SELECT user_id FROM tasks WHERE id=?");
+    $isCurrentUserTask->bind_param("i", $tid);
+    $isCurrentUserTask->execute();
+    $result = $isCurrentUserTask->get_result();
+
+    if($result->num_rows <= 0 || (int)($result->fetch_assoc()['user_id']) != $currUser) {
+      header("Location: tasks.php");
+      die($currUser);
+    }
+
+    // complete the task, delete the task, or edit the task depending on the action param
+    if(isset($_GET['action'])) {
+      if($_GET['action'] == 'complete') {
+        $query = $conn->prepare("UPDATE tasks SET complete=1 WHERE id=?");
+        $query->bind_param("i", $tid);
+        $query->execute();
+        header("Location: tasks.php");
+        die();
+      }
+
+      else if($_GET['action'] == 'delete') {
+        $query = $conn->prepare("DELETE FROM tasks WHERE id=?");
+        $query->bind_param("i", $tid);
+        $query->execute();
+        header("Location: tasks.php");
+        die();
+      }
+
+      else if($_GET['action'] == 'edit') {
+        $query = $conn->prepare("SELECT * FROM tasks WHERE id=? AND user_id=?");
+        $query->bind_param("ii", $tid, $currUser); 
+        if($query->execute()) {
+          $data = $query->get_result()->fetch_assoc();
+          $name = $data['name'];
+          $description = $data['description'];
+          $due_date = $data['due_date'];
+        }
+      }
+    } else {
+      header("Location: tasks.php");
+      die();
     }
   }
+
 ?>
 
 <!doctype html>

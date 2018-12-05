@@ -5,7 +5,7 @@
     die();
   }
   $currUser = (int)($_SESSION['currentUser']);
-  $sql = "SELECT * FROM tasks where user_id = $currUser";
+  $sql = "SELECT * FROM tasks WHERE user_id = $currUser";
   $result = $conn->query($sql);
 ?>
 
@@ -58,9 +58,9 @@
             </div>
           </div>
           <footer class="card-footer">
-            <a href="#" class="card-footer-item">Complete</a>
-            <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item">Delete</a>
+            <a href="edit_task.php?action=complete&tid=<?php echo $row['id']; ?>" class="card-footer-item">Complete</a>
+            <a href="edit_task.php?action=edit&tid=<?php echo $row['id']; ?>" class="card-footer-item">Edit</a>
+            <a href="edit_task.php?action=delete&tid=<?php echo $row['id']; ?>" class="card-footer-item">Delete</a>
           </footer>
         </div>
 
