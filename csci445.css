@@ -20,10 +20,18 @@
   margin-left: 20em;
   margin-right: 20em;
 }
+.form_holder_pass{
+  margin-left: 23em;
+  margin-right: 23em;
+}
 
 .login_button{
   width: 25%;
   float: right;
+}
+.pass_button{
+  width: 30%;
+  float: left;
 }
 .signup_button{
   width: 25%;
