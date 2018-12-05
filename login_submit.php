@@ -14,6 +14,7 @@
     $user = $result->fetch_assoc();
     print_r($user);
     $_SESSION['currentUser'] = $user['id'];
+    $_SESSION['loginTime'] = time();
     header("Location: index.php");
   } else {
     $error = "Invalid email or password";
