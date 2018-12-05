@@ -1,3 +1,39 @@
+<?php
+  include("mysql_connection.php");
+  print_r($_POST);
+  
+  $email = $_POST['email'];
+  $query = $conn->prepare("SELECT * FROM users WHERE email=?");
+  $query->bind_param("s", $email);
+  $query->execute();
+  $result = $query->get_result();
+
+  if($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+    $found = 1;
+  } else {
+    $error = "Invalid email or password";
+    $found = 0;
+  }
+
+  if($found == 1){
+      
+    $token = hash('sha256', time());
+    $url = $_SERVER['SERVER_NAME'] . "/change_pass.php" . "/?token=" . $token;
+    echo $url;
+    $to = $user['email'];
+    $subject = "Forgot Password";
+    $message = "Please click the following link to recover your password" . "\r\n" . $url;
+
+    mail ($to, $subject, $message);
+      
+    $query = $conn->prepare("INSERT INTO user_forgotten_password (token, user_id, email) VALUES(?, ?, ?)");
+    $query->bind_param("sis", $token, $user['id'], $user['email']);
+    $query->execute();
+  }
+  
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,11 +49,11 @@
     <hr>
       <section class="center form">
         <div class="has-text-centered">
-          <h1 class="is-size-3">Welcome to Task Manager <i class="fa fa-tasks" aria-hidden="true" id="taskIcon"> </i></h1>
-          <h3 class="is-size-4">Please login below</h3>
+          <h1 class="is-size-3">Forgot Password</h1>
+          <h3 class="is-size-4">Enter email to retrieve password</h3>
           <br> <br> <br>
         </div>
-        <div class="form_holder_login">
+        <div class="form_holder_pass">
           <p>
             <?php
               if(isset($error)) {
@@ -26,7 +62,7 @@
             ?>
 
           </p>
-          <form action="login_submit.php" method="post">
+          <form action="forgot_password_submit.php" method="post">
             <div class="field">
               <label class="label">Email</label>
               <div class="control has-icons-left has-icons-right">
@@ -36,14 +72,8 @@
                 </span>
               </div>
             </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input class="input" type="password" name="password">
-              </div>
-            </div>
-            <a class="button is-link is-inverted">Forgot Password</a>
-            <input class="button is-primary login_button" type="submit" title="Login">
+            <p class="has-text-info">Email has been sent if recovery email exists. </p> <br>
+            <input class="button is-primary pass_button" type="submit" title="Submit">
             </div>
           </form>
           <br> <br> <br>
@@ -55,3 +85,4 @@
       ?>
   </body>
 </html>
+

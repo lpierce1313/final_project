@@ -22,7 +22,7 @@
       header('Location: tasks.php');
       die();
     } else {
-      inclide("create_task.php");
+      include("create_task.php");
     }
   }
 ?>
