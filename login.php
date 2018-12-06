@@ -18,7 +18,7 @@
           <br> <br> <br>
         </div>
         <div class="form_holder_login">
-          <p>
+          <p class="has-text-danger">
             <?php
               if(isset($error)) {
                 echo $error;
