@@ -49,9 +49,8 @@
                 echo $error;
               }
             ?>
-
           </p>
-          <form name="pass" action="change_pass_submit.php" method="post" onsubmit="return validateForm()">
+          <form name="pass" action="../change_pass_submit.php" method="post" onsubmit="return validateForm()">
             <div class="field">
               <label class="label">New Password</label>
               <div class="control">
@@ -72,11 +71,7 @@
           </form>
           <br> <br> <br>
         </div>
-        <?php } else {
-          header('Location: ../index.php');
-          die();
-        }
-        ?>
+        <?php } ?>
       </section>
       <br>
       <?php
