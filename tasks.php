@@ -27,7 +27,6 @@
     <hr>
       <section class="card_margin">
         <h1 class="has-text-centered is-size-4">Incomplete Tasks</h1>
-
         <br><br>
         <?php
         if ($incomplete->num_rows > 0) {

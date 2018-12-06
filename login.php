@@ -42,7 +42,7 @@
                 <input class="input" type="password" name="password">
               </div>
             </div>
-            <a class="button is-link is-inverted">Forgot Password</a>
+            <a class="button is-link is-inverted" href="./forgot_password.php">Forgot Password</a>
             <input class="button is-primary login_button" type="submit" title="Login">
             </div>
           </form>
