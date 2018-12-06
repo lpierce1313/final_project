@@ -1,5 +1,16 @@
 <?php
   include("mysql_connection.php");
+
+  if(!loggedIn()) {
+    header("Location: login.php");
+    die();
+  }
+
+  $currUser = (int)$_SESSION['currentUser'];
+  $query = $conn->prepare("SELECT * FROM users WHERE id=?");
+  $query->bind_param("i", $currUser);
+  $query->execute();
+  $user = $query->get_result()->fetch_assoc();
 ?>
 
 <!doctype html>
@@ -18,7 +29,7 @@
       <section class="center form">
         <div class="has-text-centered">
           <h1 class="is-size-3">Create New Task</h1>
-          <h3 class="is-size-4">lpierce1313@gmail.com</h3>
+          <h3 class="is-size-4"><?php echo $user['email']; ?></h3>
           <br> <br> <br>
         </div>
         <div class="form_holder">

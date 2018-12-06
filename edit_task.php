@@ -95,7 +95,7 @@
     <hr>
       <section class="center form">
         <div class="has-text-centered">
-          <h1 class="is-size-3">Create New Task</h1>
+          <h1 class="is-size-3">Edit Task</h1>
           <h3 class="is-size-4"><?php echo isset($error) ? $error : ''; ?></h3>
           <br> <br> <br>
         </div>

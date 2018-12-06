@@ -1,3 +1,12 @@
+<?php
+  include("mysql_connection.php");
+
+  if(loggedIn()) {
+    header("Location: index.php");
+    die();
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,7 +27,7 @@
           <br> <br> <br>
         </div>
         <div class="form_holder_login">
-          <p>
+          <p class="has-text-danger">
             <?php
               if(isset($error)) {
                 echo $error;
