@@ -1,7 +1,5 @@
 <?php
   include("mysql_connection.php");
-  print_r($_POST);
-
   $email = $_POST['email'];
   $query = $conn->prepare("SELECT * FROM users WHERE email=?");
   $query->bind_param("s", $email);
