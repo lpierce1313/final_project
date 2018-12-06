@@ -1,3 +1,12 @@
+<?php
+  include("mysql_connection.php");
+
+  if(loggedIn()) {
+    header("Location: index.php");
+    die();
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>

@@ -4,6 +4,11 @@ ini_set('display_errors', true);
 
   include("mysql_connection.php");
 
+  if(loggedIn()) {
+    header("Location: index.php");
+    die();
+  }
+
   if(isset($_POST['submit'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];

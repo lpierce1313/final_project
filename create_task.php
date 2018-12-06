@@ -1,5 +1,10 @@
 <?php
   include("mysql_connection.php");
+
+  if(!loggedIn()) {
+    header("Location: login.php");
+    die();
+  }
 ?>
 
 <!doctype html>

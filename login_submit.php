@@ -1,6 +1,11 @@
 <?php
   include("mysql_connection.php");
 
+  if(loggedIn()) {
+    header("Location: index.php");
+    die();
+  }
+
   $email = $_POST['email'];
   $password = hash('sha256', $_POST['password']);
 
