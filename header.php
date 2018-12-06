@@ -42,6 +42,9 @@
             <a class="button is-light" href="./logout.php">
               Log out
             </a>
+            <a class="button is-light" href="./change_password.php">
+              Change Password
+            </a>
           <?php } else { ?>
             <a class="button is-primary" href="./signup.php">
               <strong>Sign up</strong>

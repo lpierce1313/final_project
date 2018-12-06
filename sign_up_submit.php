@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-  include("mysql_connection.php");
+  include_once("mysql_connection.php");
 
   if(loggedIn()) {
     header("Location: index.php");
@@ -17,6 +17,18 @@ ini_set('display_errors', true);
 
     // Perform validations
 
+    // Check if email already exists
+    $query = $conn->prepare("SELECT email FROM users WHERE email=?");
+    $query->bind_param("s", $email);
+    $query->execute();
+    $emailResult = $query->get_result();
+
+    if($emailResult->num_rows > 0) {
+      $error = "Email already registered.";
+      include("signup.php");
+      die();
+    }
+
     $activation_token = hash('md5', $email . time());
 
     $insertQuery = $conn->prepare("INSERT INTO users (email, first_name, last_name, password, activation_token) VALUES(?, ?, ?, ?, ?)");
@@ -30,13 +42,10 @@ ini_set('display_errors', true);
       }
       $message .= $base . "activate.php?token=" . $activation_token;
       mail($email, "CSCI445 Sign up email", $message);
-      echo "<script>alert('Sign in succes! You are being redirected to the home page.');</script>";
-      // die();
-      // header('Location: index.php?mes=');
       header('Location: index.php');
 
     } else{
-      echo "<html>Error Creating your user</html>";
+      $error = "Error Creating your user";
     }
   }
   // Show sign up page w/ errors

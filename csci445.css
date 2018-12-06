@@ -58,3 +58,12 @@
 .tealColor{
   color: #11807F;
 }
+
+#flash_message {
+  position: absolute;
+  width: 400px;
+  max-height: 200px;
+  top: 50px;
+  left: 10px;
+  z-index: 500;
+}

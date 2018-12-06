@@ -1,7 +1,5 @@
 <?php
   include("mysql_connection.php");
-  print_r($_POST);
-
   $email = $_POST['email'];
   $query = $conn->prepare("SELECT * FROM users WHERE email=?");
   $query->bind_param("s", $email);
@@ -23,8 +21,7 @@
     if(file_exists('cred.php')){
       include 'cred.php';
     }
-    $url = $base . "/change_pass.php" . "/?token=" . $token;
-    echo $url;
+    $url = $base . "change_pass.php" . "/?token=" . $token;
     $to = $user['email'];
     $subject = "Forgot Password";
     $message = "Please click the following link to recover your password" . "\r\n" . $url;

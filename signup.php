@@ -1,5 +1,5 @@
 <?php
-  include("mysql_connection.php");
+  include_once("mysql_connection.php");
 
   if(loggedIn()) {
     header("Location: index.php");
@@ -27,6 +27,11 @@
           <br> <br> <br>
         </div>
         <div class="form_holder">
+          <p class="has-text-danger">
+            <?php
+              if(isset($error)) echo $error;
+            ?>
+          </p>
           <form name="signup" class="" action="sign_up_submit.php" method="post" onsubmit="return validateForm()">
             <div class="columns">
               <div class="column">

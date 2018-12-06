@@ -17,7 +17,7 @@
 
     $updateQuery = $conn->prepare("UPDATE tasks SET name=?, description=?, due_date=?, urgency=? WHERE id=? AND user_id=?");
     $updateQuery->bind_param("sssiii", $name, $description, $due_date, $urgency, $tid, $currUser);
-    
+
     if($updateQuery->execute()) {
       header("Location: tasks.php");
       die();
@@ -64,7 +64,7 @@
 
       else if($_GET['action'] == 'edit') {
         $query = $conn->prepare("SELECT * FROM tasks WHERE id=? AND user_id=?");
-        $query->bind_param("ii", $tid, $currUser); 
+        $query->bind_param("ii", $tid, $currUser);
         if($query->execute()) {
           $data = $query->get_result()->fetch_assoc();
           $name = $data['name'];
@@ -133,9 +133,9 @@
                   <div class="control">
                     <div class="select">
                       <select class="fullWidth" name="urgency">
-                        <option>Unimportant</option>
-                        <option>Important</option>
-                        <option>Critical</option>
+                        <option value=0>Unimportant</option>
+                        <option value=1>Important</option>
+                        <option value=2>Critical</option>
                       </select>
                     </div>
                   </div>
