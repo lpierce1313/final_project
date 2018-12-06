@@ -21,7 +21,6 @@
   $flag = 0;
   if(isset($_GET['flag'])){
     $flag = $_GET['flag'];
-    echo $flag;
   }
 ?>
 
