@@ -1,5 +1,5 @@
 <?php
-  include("mysql_connection.php");
+  include_once("mysql_connection.php");
 
   if(loggedIn()) {
     header("Location: index.php");
