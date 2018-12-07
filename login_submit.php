@@ -1,11 +1,10 @@
 <?php
   include_once("mysql_connection.php");
 
-  if(loggedIn()) {
-    header("Location: index.php");
-    die();
+  if (loggedIn()) {
+      header("Location: index.php");
+      die();
   }
-
   $email = $_POST['email'];
   $password = hash('sha256', $_POST['password']);
 
@@ -14,20 +13,18 @@
   $query->execute();
   $result = $query->get_result();
 
-  if($result->num_rows == 1) {
-    $user = $result->fetch_assoc();
-
-    if($user['activation_token'] != 0) {
-      $error = "Please activate your account.";
-    } else {
-      $_SESSION['currentUser'] = $user['id'];
-      $_SESSION['loginTime'] = time();
-      header("Location: index.php");
-    }
-
+  if ($result->num_rows == 1) {
+      $user = $result->fetch_assoc();
+      if (strlen($user['activation_token']) == 1) {
+          $_SESSION['currentUser'] = $user['id'];
+          $_SESSION['loginTime'] = time();
+          header("Location: index.php");
+          die();
+      } else {
+          $error = "Please activate your account.";
+      }
   } else {
-    $error = "Invalid email or password.";
+      $error = "Invalid email or password.";
   }
 
   include("login.php");
-?>
